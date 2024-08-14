@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
+use Alert;
 
-class CategoryController extends Controller
+class PinjamController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +17,7 @@ class CategoryController extends Controller
     {
         //select * from categorys;
         $datas = Category::get();
-        return view('category.index', compact('datas'));
+        return view('pinjam.index', compact('datas'));
     }
 
     /**
@@ -26,7 +27,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('category.create');
+        $categories = Category::get();
+        return view('pinjam.create', compact('categories'));
     }
 
     /**
@@ -73,7 +75,7 @@ class CategoryController extends Controller
     {
         //$category = category::where('id', $id)->first();
         $edit = Category::find($id);
-        return view('category.edit', compact('edit'));
+        return view('category/edit', compact('edit'));
     }
 
     /**
@@ -83,9 +85,9 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-
+        $category = Category::find($id);
         Category::where('id', $id)->update([
             'category_name' => $request->category_name,
 
@@ -106,7 +108,7 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
         Category::find($id)->delete();
         return redirect()->to('category')->with('message', 'Data berhasil dihapus');

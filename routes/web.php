@@ -1,7 +1,10 @@
 <?php
 
+
+use App\Http\Controllers\PinjamController;
 use App\Http\Controllers\BooksController;
 use App\Http\Controllers\ActionLogin;
+use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\BelajarController;
 use App\Http\Controllers\CategoryController;
@@ -22,6 +25,8 @@ use Illuminate\Support\Facades\Route;
 
 
 //get,post, put delete
+Route::get('getBuku/{category_id}', [AjaxController::class, 'getDataBuku']);
+Route::resource('pinjam', PinjamController::class);
 Route::resource('book', BooksController::class);
 Route::post('login', [LoginController::class, 'actionLogin'])->name('actionLogin');
 Route::resource('category', CategoryController::class);

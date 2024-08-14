@@ -18,6 +18,7 @@
 </head>
 
 <body class="hold-transition login-page">
+    @include('sweetalert::alert')
     <div class="login-box">
         <div class="login-logo">
             <a href="../../index2.html"><b>Admin</b>Panel</a>
